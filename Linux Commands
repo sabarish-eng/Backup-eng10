@@ -1,0 +1,459 @@
+1. File and Directory Management
+
+ls: List directory contents.
+
+ls -l: Detailed listing (permissions, owner, size, etc.).
+ls -a: Include hidden files.
+ls -lh: Human-readable file sizes.
+
+
+cd <path>: Change directory (e.g., cd /var/log).
+
+cd ..: Move up one directory.
+cd ~: Go to home directory.
+cd -: Return to the previous directory.
+
+
+pwd: Print working directory (shows current path).
+mkdir <name>: Create directory (e.g., mkdir project).
+
+mkdir -p /path/to/nested/dir: Create parent directories as needed.
+
+
+rm <file>: Remove file (e.g., rm file.txt).
+
+rm -r <dir>: Remove directory and contents recursively.
+rm -f: Force removal without prompting.
+
+
+cp <source> <destination>: Copy files/directories.
+
+cp -r <dir> <dest>: Copy directory recursively (e.g., cp -r folder1 folder2).
+cp -p: Preserve file attributes (permissions, timestamps).
+
+
+mv <source> <destination>: Move or rename files/directories.
+
+mv file.txt newdir/: Move file to directory.
+mv oldname.txt newname.txt: Rename file.
+
+
+touch <file>: Create empty file or update timestamp (e.g., touch newfile.txt).
+find <path> -name <pattern>: Search for files.
+
+find / -name "*.log": Find all .log files.
+find . -type f -mtime -7: Find files modified in the last 7 days.
+
+
+locate <name>: Fast file search using a database (e.g., locate config).
+
+Requires sudo updatedb to refresh the database.
+
+
+tree: Display directory structure as a tree.
+
+tree -a: Include hidden files.
+
+
+du <path>: Disk usage of files/directories.
+
+du -sh <dir>: Human-readable summary (e.g., du -sh /home).
+
+
+ln <target> <link>: Create links.
+
+ln -s <file> <link>: Create symbolic (soft) link (e.g., ln -s /path/to/file linkname).
+ln <file> <link>: Create hard link.
+
+
+
+2. File Viewing and Editing
+
+cat <file>: Display file contents (e.g., cat log.txt).
+
+cat file1 file2 > combined.txt: Concatenate files.
+
+
+less <file>: View file with pagination (navigate with arrow keys, q to quit).
+more <file>: Similar to less, but less interactive.
+head <file>: Show first 10 lines.
+
+head -n 5 <file>: Show first 5 lines.
+
+
+tail <file>: Show last 10 lines.
+
+tail -n 5 <file>: Show last 5 lines.
+tail -f <file>: Follow file for real-time updates (e.g., logs).
+
+
+nano <file>: Edit file in nano (simple text editor).
+
+Save: Ctrl+O, Exit: Ctrl+X.
+
+
+vim <file>: Edit file in vim (advanced editor).
+
+Basic commands: i (insert), :w (save), :q (quit), :wq (save and quit).
+
+
+emacs <file>: Edit file in Emacs (another powerful editor).
+wc <file>: Count lines, words, or characters.
+
+wc -l: Lines, wc -w: Words, wc -c: Bytes.
+
+
+diff <file1> <file2>: Compare two files for differences.
+
+diff -u file1 file2: Unified diff format.
+
+
+patch <file> <patchfile>: Apply a diff patch to a file.
+
+3. System Information
+
+uname -a: Show system info (kernel version, architecture, etc.).
+lsb_release -a: Display distribution-specific info (e.g., Ubuntu version).
+df -h: Disk space usage in human-readable format.
+free -h: Memory usage (RAM and swap).
+top: Real-time process monitor.
+
+Alternative: htop (more user-friendly, if installed).
+
+
+ps: List current shell’s processes.
+
+ps aux: List all running processes with details.
+
+
+whoami: Display current username.
+id: Show user and group IDs.
+uptime: Show system uptime and load average.
+lscpu: Display CPU information.
+lsblk: List block devices (e.g., disks, partitions).
+dmidecode: Hardware information (requires root).
+dmesg: Show kernel log messages.
+
+dmesg | grep error: Filter for errors.
+
+
+
+4. File Permissions and Ownership
+
+chmod <mode> <file>: Change file permissions.
+
+Numeric: chmod 755 script.sh (owner: rwx, others: rx).
+Symbolic: chmod u+x script.sh (add execute for user).
+
+
+chown <user>:<group> <file>: Change file ownership.
+
+chown -R user:group dir/: Recursive ownership change.
+
+
+chgrp <group> <file>: Change group ownership.
+
+chgrp -R group dir/: Recursive group change.
+
+
+umask: Set default permissions for new files (e.g., umask 022).
+ls -l: View file permissions, owner, and group.
+getfacl <file>: Display Access Control List (ACL) permissions.
+setfacl -m u:user:rwx <file>: Modify ACL permissions.
+
+5. Process Management
+
+ps aux: List all processes with details.
+top or htop: Monitor processes interactively.
+kill <PID>: Terminate process by ID (e.g., kill 1234).
+
+kill -9 <PID>: Force kill (SIGKILL).
+
+
+pkill <name>: Kill processes by name (e.g., pkill python).
+killall <name>: Kill all processes with a given name.
+nice -n <value> <command>: Set process priority (-19 highest, 19 lowest).
+renice <value> <PID>: Change priority of running process.
+jobs: List background jobs in the current shell.
+bg: Send a process to the background (e.g., bg %1).
+fg: Bring a background process to the foreground (e.g., fg %1).
+nohup <command> &: Run command immune to hangups (e.g., nohup script.sh &).
+
+6. Networking
+
+ping <host>: Test connectivity (e.g., ping 8.8.8.8).
+curl <URL>: Fetch data from a URL (e.g., curl https://api.example.com).
+
+curl -O <URL>: Download file.
+
+
+wget <URL>: Download files (e.g., wget https://example.com/file.tar.gz).
+
+wget -r <URL>: Recursive download (e.g., websites).
+
+
+netstat -tuln: List listening ports and services.
+ss -tuln: Modern alternative to netstat.
+ifconfig: Display network interfaces (older command).
+ip addr: Modern alternative to ifconfig.
+ip link set <interface> up/down: Enable/disable network interface.
+route: Display routing table.
+
+ip route: Modern alternative.
+
+
+ssh <user@host>: Securely connect to a remote server (e.g., ssh user@192.168.1.1).
+scp <file> <user@host:/path>: Securely copy files to/from a remote server.
+rsync -av <source> <destination>: Sync files/directories efficiently.
+
+rsync -av /local/ user@remote:/remote/: Remote sync.
+
+
+nmap <host>: Scan network for open ports (e.g., nmap 192.168.1.1).
+dig <domain>: Query DNS information.
+host <domain>: Simple DNS lookup.
+iptables: Configure firewall rules (e.g., iptables -L to list rules).
+
+Alternative: ufw (simpler firewall tool, e.g., ufw allow 22).
+
+
+
+7. Package Management
+
+Debian/Ubuntu (apt):
+
+sudo apt update: Update package lists.
+sudo apt upgrade: Upgrade installed packages.
+sudo apt install <package>: Install a package (e.g., apt install vim).
+sudo apt remove <package>: Remove a package.
+sudo apt autoremove: Remove unused dependencies.
+apt search <keyword>: Search for packages.
+
+
+Red Hat/CentOS/Fedora (yum/dnf):
+
+sudo dnf update: Update packages.
+sudo dnf install <package>: Install a package.
+sudo dnf remove <package>: Remove a package.
+dnf search <keyword>: Search for packages.
+
+
+Arch Linux (pacman):
+
+sudo pacman -Syu: Update system and packages.
+sudo pacman -S <package>: Install a package.
+sudo pacman -R <package>: Remove a package.
+
+
+Snap (cross-distribution):
+
+snap install <package>: Install a snap package.
+snap remove <package>: Remove a snap package.
+
+
+Flatpak (cross-distribution):
+
+flatpak install <package>: Install a flatpak package.
+flatpak uninstall <package>: Remove a flatpak package.
+
+
+
+8. Text Processing
+
+grep <pattern> <file>: Search text in files.
+
+grep -r "error" /var/log: Recursive search.
+grep -i: Case-insensitive search.
+
+
+awk '{print $1}' <file>: Process text by fields.
+
+Example: awk -F: '{print $1}' /etc/passwd (print usernames).
+
+
+sed 's/old/new/g' <file>: Replace text.
+
+sed -i 's/foo/bar/g' file.txt: In-place edit.
+
+
+cut -d',' -f1 <file>: Extract fields from delimited files.
+
+Example: cut -d: -f1 /etc/passwd (extract usernames).
+
+
+sort <file>: Sort lines.
+
+sort -r: Reverse order.
+sort -n: Numeric sort.
+
+
+uniq <file>: Remove duplicate lines (often used with sort).
+
+sort file.txt | uniq: Remove duplicates after sorting.
+
+
+tr 'a' 'A' <file>: Translate characters (e.g., lowercase to uppercase).
+tee <file>: Write output to both terminal and file (e.g., ls | tee output.txt).
+paste <file1> <file2>: Merge lines of files side by side.
+join <file1> <file2>: Join lines of two files on a common field.
+
+9. System Control
+
+sudo <command>: Run command as superuser (e.g., sudo apt update).
+su: Switch to another user (default: root).
+
+su - <user>: Switch with user’s environment.
+
+
+reboot: Restart the system.
+shutdown -h now: Shut down immediately.
+shutdown -r now: Reboot immediately.
+halt: Halt the system.
+init 0: Shut down (alternative).
+init 6: Reboot (alternative).
+passwd: Change current user’s password.
+
+passwd <user>: Change another user’s password (requires root).
+
+
+crontab -e: Edit cron jobs for scheduling tasks.
+at <time>: Schedule a one-time task (e.g., at 14:00).
+systemctl: Manage system services.
+
+systemctl start <service>: Start a service (e.g., systemctl start apache2).
+systemctl stop <service>: Stop a service.
+systemctl enable <service>: Enable service at boot.
+
+
+journalctl: View system logs.
+
+journalctl -u <service>: Logs for a specific service.
+
+
+man <command>: Show manual for a command.
+info <command>: Alternative documentation system.
+history: List command history.
+
+!<number>: Re-run command by history number.
+
+
+
+10. Compression and Archiving
+
+tar -cvf <archive.tar> <files>: Create tar archive.
+
+tar -zcvf <archive.tar.gz> <files>: Create compressed tar.gz.
+tar -jcvf <archive.tar.bz2> <files>: Create compressed tar.bz2.
+
+
+tar -xvf <archive.tar>: Extract tar archive.
+
+tar -zxvf <archive.tar.gz>: Extract tar.gz.
+tar -jxvf <archive.tar.bz2>: Extract tar.bz2.
+
+
+gzip <file>: Compress file to .gz (e.g., gzip file.txt).
+gunzip <file.gz>: Decompress .gz file.
+bzip2 <file>: Compress file to .bz2.
+bunzip2 <file.bz2>: Decompress .bz2 file.
+zip -r <archive.zip> <dir>: Create zip archive.
+unzip <archive.zip>: Extract zip archive.
+xz <file>: Compress file to .xz.
+unxz <file.xz>: Decompress .xz file.
+
+11. User and Group Management
+
+useradd <user>: Add a new user (e.g., useradd -m newuser to create home directory).
+usermod: Modify user settings.
+
+usermod -aG <group> <user>: Add user to a group.
+
+
+userdel <user>: Delete a user (e.g., userdel -r user to remove home directory).
+groupadd <group>: Create a new group.
+groupdel <group>: Delete a group.
+adduser: Interactive tool to add a user (more user-friendly than useradd).
+passwd <user>: Change user’s password.
+who: List logged-in users.
+w: Show what logged-in users are doing.
+last: Show recent login history.
+
+12. Shell and Environment
+
+echo $VARIABLE: Display environment variable (e.g., echo $PATH).
+export VARIABLE=value: Set environment variable (e.g., export PATH=$PATH:/new/path).
+env: List all environment variables.
+alias <name>='command': Create command alias (e.g., alias ll='ls -l').
+unalias <name>: Remove alias.
+source <file>: Execute file in current shell (e.g., source ~/.bashrc).
+. <file>: Same as source.
+bash: Start a new Bash shell.
+zsh: Start a Zsh shell (if installed).
+set: Display all shell variables and functions.
+
+13. Disk and Filesystem Management
+
+fdisk -l: List disk partitions (requires root).
+parted: Partition disks interactively.
+mkfs.<type> <device>: Format a partition (e.g., mkfs.ext4 /dev/sdb1).
+mount <device> <path>: Mount a filesystem (e.g., mount /dev/sdb1 /mnt).
+umount <path>: Unmount a filesystem (e.g., umount /mnt).
+fsck <device>: Check and repair filesystem (e.g., fsck /dev/sdb1).
+blkid: List UUIDs and types of block devices.
+dd if=<input> of=<output>: Low-level copy or backup (e.g., dd if=/dev/sda of=backup.img).
+
+14. Miscellaneous
+
+clear: Clear terminal screen.
+date: Display or set system date/time.
+cal: Display calendar (cal -y for full year).
+watch <command>: Run command repeatedly (e.g., watch -n 2 date).
+sleep <seconds>: Pause for a specified time (e.g., sleep 5).
+tee <file>: Write output to terminal and file (e.g., ls | tee output.txt).
+xargs: Pass input as arguments to a command (e.g., find . -name "*.txt" | xargs rm).
+bc: Command-line calculator (e.g., echo "5+3" | bc).
+which <command>: Show path to command (e.g., which python).
+whereis <command>: Locate binary, source, and manual for a command.
+file <file>: Identify file type (e.g., file image.jpg).
+
+15. Scripting and Automation
+
+bash <script.sh>: Run a Bash script.
+chmod +x <script.sh>: Make script executable.
+sh <script.sh>: Run shell script (alternative).
+crontab -e: Schedule recurring tasks.
+
+Example: 0 2 * * * /backup.sh (run daily at 2 AM).
+
+
+at <time>: Schedule one-time task (e.g., at now + 1 hour).
+watch -n <seconds> <command>: Run command periodically.
+
+Tips for Using Commands
+
+Piping: Use  to send output of one command to another (e.g., ls | grep txt).
+Redirection:
+
+>: Write output to file (overwrites).
+>>: Append output to file.
+<: Use file as input (e.g., wc -l < file.txt).
+
+
+Command chaining:
+
+&&: Run next command if previous succeeds (e.g., mkdir test && cd test).
+||: Run next command if previous fails (e.g., ping 8.8.8.8 || echo "Failed").
+;: Run commands sequentially (e.g., ls; pwd).
+
+
+Autocompletion: Press Tab to complete commands, paths, or filenames.
+History navigation:
+
+Up/Down arrows: Cycle through command history.
+!!: Repeat last command.
+!<number>: Run command by history number.
+
+
+Background tasks: Append & to run a command in the background (e.g., sleep 10 &).
+Interrupt: Press Ctrl+C to stop a running command.
+Sudo caution: Use sudo only when necessary, as it grants elevated privileges.
